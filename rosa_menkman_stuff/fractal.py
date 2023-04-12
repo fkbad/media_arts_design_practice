@@ -53,13 +53,13 @@ def crop_into_Nths(n=4):
         outputs list of images
     """
     coords = get_Nth_coordinates(n)
-    print(coords)
+    # print(coords)
     # empty list to store my N images
     image_list = [global_image.copy()]
     for coordinate in coords:
         dimension_tuple = get_width_and_height_to_crop_from_tuple(coordinate)
-        print(f"coord: {coordinate}")
-        print(f"dimension: {dimension_tuple}")
+        # print(f"coord: {coordinate}")
+        # print(f"dimension: {dimension_tuple}")
         cropped_image = mycrop(coordinate,dimension_tuple)
         image_list.append(cropped_image)
         # cropped_image.show()
@@ -76,8 +76,11 @@ def to_jpeg(image,label: int, quality=0):
     rgb_img.save(new_temp_jpg_name(label), quality=0)
     
 
+def jpegify_list(image_list):
+    for label,image in enumerate(image_list):
+        print(label)
+        # to_jpeg(image,label,quality=0)
+
+
 list = crop_into_Nths(3)
-
-to_jpeg(list[1],1)
-# def jpegify_list(image_list)
-
+jpegify_list(list)
