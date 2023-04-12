@@ -9,7 +9,7 @@ import math
 # global parameters
 global_image = Image.open("mandelbrot.png")
 output_path = "output/"
-temp = output_path + "temp.jpg"
+temp = output_path + "temp"
 WIDTH, HEIGHT = global_image.size
 
 def get_copy():
@@ -62,13 +62,22 @@ def crop_into_Nths(n=4):
         print(f"dimension: {dimension_tuple}")
         cropped_image = mycrop(coordinate,dimension_tuple)
         image_list.append(cropped_image)
-        cropped_image.show()
+        # cropped_image.show()
 
     return image_list
 
-# def to_jpeg(image,quality=0):
-#     # https://stackoverflow.com/questions/43258461/convert-png-to-jpeg-using-pillow
-#     rgb_img = img_crop.convert('RGB')
-#     rgb_img.save(temp, quality=0)
+def new_temp_jpg_name(label: int):
+    return temp + str(label) + ".jpg"
 
-list = crop_into_Nths(4)
+def to_jpeg(image,label: int, quality=0):
+    # https://stackoverflow.com/questions/43258461/convert-png-to-jpeg-using-pillow
+    rgb_img = image.convert('RGB')
+
+    rgb_img.save(new_temp_jpg_name(label), quality=0)
+    
+
+list = crop_into_Nths(3)
+
+to_jpeg(list[1],1)
+# def jpegify_list(image_list)
+
